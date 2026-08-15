@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+release_repo="EmbrasureAI/embrasure-cli"
+tag="${1:-$(gh release view --repo "${release_repo}" --json tagName --jq .tagName)}"
+version="${tag#v}"
+temporary_dir="$(mktemp -d)"
+trap 'rm -rf "${temporary_dir}"' EXIT
+
+gh release download "${tag}" \
+  --repo "${release_repo}" \
+  --pattern SHA256SUMS \
+  --dir "${temporary_dir}"
+
+checksum_file="${temporary_dir}/SHA256SUMS"
+
+checksum() {
+  local filename="$1"
+  local value
+  value="$(awk -v filename="${filename}" '$2 == filename || $2 == "dist/" filename { print $1 }' "${checksum_file}")"
+  if [[ ! "${value}" =~ ^[0-9a-f]{64}$ ]]; then
+    echo "missing checksum for ${filename}" >&2
+    exit 1
+  fi
+  printf '%s' "${value}"
+}
+
+macos_arm="embrasure-${version}-aarch64-apple-darwin.tar.gz"
+macos_intel="embrasure-${version}-x86_64-apple-darwin.tar.gz"
+linux_arm="embrasure-${version}-aarch64-unknown-linux-gnu.tar.gz"
+linux_intel="embrasure-${version}-x86_64-unknown-linux-gnu.tar.gz"
+
+mkdir -p Formula
+
+cat > Formula/embrasure.rb <<EOF
+class Embrasure < Formula
+  desc "Validate dbt changes against production Snowflake data"
+  homepage "https://github.com/EmbrasureAI/embrasure-cli"
+  version "${version}"
+  license "Apache-2.0"
+
+  on_macos do
+    on_arm do
+      url "https://github.com/${release_repo}/releases/download/${tag}/${macos_arm}"
+      sha256 "$(checksum "${macos_arm}")"
+    end
+    on_intel do
+      url "https://github.com/${release_repo}/releases/download/${tag}/${macos_intel}"
+      sha256 "$(checksum "${macos_intel}")"
+    end
+  end
+
+  on_linux do
+    on_arm do
+      url "https://github.com/${release_repo}/releases/download/${tag}/${linux_arm}"
+      sha256 "$(checksum "${linux_arm}")"
+    end
+    on_intel do
+      url "https://github.com/${release_repo}/releases/download/${tag}/${linux_intel}"
+      sha256 "$(checksum "${linux_intel}")"
+    end
+  end
+
+  def install
+    bin.install "embrasure"
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/embrasure --version")
+  end
+end
+EOF
