@@ -1,7 +1,6 @@
 class Embrasure < Formula
   desc "Validate dbt changes against production Snowflake data"
   homepage "https://github.com/EmbrasureAI/embrasure-cli"
-  version "0.3.2"
   license "Apache-2.0"
 
   on_macos do
