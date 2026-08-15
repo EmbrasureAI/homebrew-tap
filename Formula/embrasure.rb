@@ -5,23 +5,23 @@ class Embrasure < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.3.2/embrasure-0.3.2-aarch64-apple-darwin.tar.gz"
-      sha256 "552e7e50d5eee6d218b7eb3b16898b24d190e0dd587bf3acac9564bdb9337742"
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.3.3/embrasure-0.3.3-aarch64-apple-darwin.tar.gz"
+      sha256 "345a84fcaeb65c057f7693e9abff79eb845cb0576fdc742c98a7af0a3d126449"
     end
     on_intel do
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.3.2/embrasure-0.3.2-x86_64-apple-darwin.tar.gz"
-      sha256 "c9aad15544f8c440e5d8c4b6849af468f7510585a23bb9d33093f454cd20ff99"
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.3.3/embrasure-0.3.3-x86_64-apple-darwin.tar.gz"
+      sha256 "a5fcb622649f685b4b12dd685cc4644f9ab974e70716b6baa6a56da26f41dc55"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.3.2/embrasure-0.3.2-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "ddf039194128d2a3c6cf03162cadc55af199f30e592471cb0355ffde8728c45b"
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.3.3/embrasure-0.3.3-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "29aedf2904219e31446773e9473834bc642c5dcbdb92232d046fd8e61b7b13bb"
     end
     on_intel do
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.3.2/embrasure-0.3.2-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "b0cef37bcfc19cbf3b809ef7d4132963eeb462800b9a17b52044c0e548ad9010"
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.3.3/embrasure-0.3.3-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "7b445bbc66b99b70fd5a07092ee7bb728262a7279d11b9cab0cb2ab5208af2bd"
     end
   end
 
