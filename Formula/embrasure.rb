@@ -1,31 +1,32 @@
 class Embrasure < Formula
   desc "Validate dbt changes against production Snowflake data"
   homepage "https://embrasure.ai"
-  version "0.5.1"
+  version "0.5.2"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.1/embrasure-0.5.1-aarch64-apple-darwin.tar.gz"
-      sha256 "b15d7b6812c7eb6f83a676e0199c0974698691dd6952c43079e999aca1b4b42d"
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.2/embrasure-0.5.2-aarch64-apple-darwin.tar.gz"
+      sha256 "d9cb4a2420b64e9a43ea41018a847bc84e5ad3149db806a21598546bb70f14f5"
     else
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.1/embrasure-0.5.1-x86_64-apple-darwin.tar.gz"
-      sha256 "c747a97b7b886d2e326cecc43cf553e2c9d655349f4473410205102db6921a90"
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.2/embrasure-0.5.2-x86_64-apple-darwin.tar.gz"
+      sha256 "7013c7a76fb56efd3ef2e6e2b3eb77eb9d4a65bc73bd716104c7c721f08798fe"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.1/embrasure-0.5.1-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "34ba45bd7a86afb76b9a532879ef9538707af0faafb644645180c014921bdec3"
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.2/embrasure-0.5.2-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "2b4eb2a2525cfaf5aaed06277c9ce544e51be4e921216eb61d1cba4aa65f0b42"
     else
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.1/embrasure-0.5.1-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "0f288710f743ea541dc87417af8d444025829854b0f52c44361458d771361a89"
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.2/embrasure-0.5.2-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "5d8c4243dad082ea5d46b37913c29c92a16b76dcba549ba80e4181a370c285a8"
     end
   end
 
   def install
     bin.install "embrasure"
+    (libexec/"embrasure").install "python"
   end
 
   test do
