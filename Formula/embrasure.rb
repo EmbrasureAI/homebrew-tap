@@ -1,32 +1,32 @@
 class Embrasure < Formula
-  desc "Validate dbt changes against production Snowflake data"
-  homepage "https://github.com/EmbrasureAI/embrasure-cli"
+  desc "Validate dbt changes against production warehouse data"
+  homepage "https://embrasure.ai"
+  version "0.5.4"
   license "Apache-2.0"
 
   on_macos do
-    on_arm do
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.2/embrasure-0.5.2-aarch64-apple-darwin.tar.gz"
-      sha256 "d9cb4a2420b64e9a43ea41018a847bc84e5ad3149db806a21598546bb70f14f5"
-    end
-    on_intel do
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.2/embrasure-0.5.2-x86_64-apple-darwin.tar.gz"
-      sha256 "7013c7a76fb56efd3ef2e6e2b3eb77eb9d4a65bc73bd716104c7c721f08798fe"
+    if Hardware::CPU.arm?
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.4/embrasure-0.5.4-aarch64-apple-darwin.tar.gz"
+      sha256 "694a2f7c78c5f0c840bfa873fc7b29b3116b6a5e7eb52c26e0a6973480276464"
+    else
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.4/embrasure-0.5.4-x86_64-apple-darwin.tar.gz"
+      sha256 "3d24837153d174f47e0be05a5f879ab19db3d84eecaaadee2a927f8eb6459c20"
     end
   end
 
   on_linux do
-    on_arm do
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.2/embrasure-0.5.2-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "2b4eb2a2525cfaf5aaed06277c9ce544e51be4e921216eb61d1cba4aa65f0b42"
-    end
-    on_intel do
-      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.2/embrasure-0.5.2-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "5d8c4243dad082ea5d46b37913c29c92a16b76dcba549ba80e4181a370c285a8"
+    if Hardware::CPU.arm?
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.4/embrasure-0.5.4-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "c72ccb876a9c36f3b7a33a77b79ab3cffd499b5f9db6e4d8169183909424a298"
+    else
+      url "https://github.com/EmbrasureAI/embrasure-cli/releases/download/v0.5.4/embrasure-0.5.4-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "308480ef1c7e2c6c68a1c42664da6e0f30a41ea0c3c4da195f6ea135f03882c1"
     end
   end
 
   def install
     bin.install "embrasure"
+    (libexec/"embrasure").install "python"
   end
 
   test do
